@@ -8,7 +8,7 @@ This site is designed to be fast, responsive, and easy to update by editing a si
 
 ## Live Site
 
-- GitHub Pages: (add your URL here once deployed)
+- [GitHub Pages](https://craetona.github.io/drew-portfolio/)
 
 ---
 
