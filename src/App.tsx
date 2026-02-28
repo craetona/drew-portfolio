@@ -29,13 +29,13 @@ export default function App() {
     <>
       <header className="nav">
         <div className="nav-inner">
-          <div className="brand">
+          <a className="brand" href="#top">
             <div className="badge" aria-hidden="true" />
             <div>
               <strong>{person.name}</strong>
               <div className="small">{person.location}</div>
             </div>
-          </div>
+          </a>
 
           <nav className="nav-links" aria-label="Site">
             <a className="pill" href="#about">About</a>
@@ -46,97 +46,64 @@ export default function App() {
         </div>
       </header>
 
-      <main className="container">
+      <main className="container" id="top">
         <div className="hero">
-          <h1 className="h1">Software Engineer Portfolio</h1>
-          <p className="sub">{summary}</p>
-
-          <div className="row">
-            <a className="cta" href="#timeline">View Timeline</a>
-            <a className="cta secondary" href={emailHref}>Email</a>
-            <a className="cta secondary" href={phoneHref}>Call</a>
-            {person.links.map((l) => (
-              <a className="cta secondary" key={l.label} href={l.href} target="_blank" rel="noreferrer">
-                {l.label}
-              </a>
-            ))}
-          </div>
+          <p className="eyebrow">Portfolio</p>
+          <h1 className="h1">Software Engineer</h1>
         </div>
 
         <div className="grid two">
           <div className="card" id="about">
             <h2>About</h2>
-            <p className="muted" style={{ marginTop: 0 }}>
-              {person.name} · {person.location}
+            <p className="muted" style={{ marginTop: 0, marginBottom: 0}}>
+              {person.name} - {person.location}
             </p>
-
-            <div className="hr" />
-
-            <h3>Summary</h3>
-            <p className="muted">{summary}</p>
-
-            <div className="kv" aria-label="Contact quick links">
-              <a className="pill" href={emailHref}>{person.email}</a>
-              <a className="pill" href={phoneHref}>{person.phone}</a>
+            <div className="kv" aria-label="External links">
+              {person.links.map((l) => (
+                <a className="pill" key={l.label} href={l.href} target="_blank" rel="noreferrer">
+                  {l.label}
+                </a>
+              ))}
             </div>
+            <p>{summary}</p>
           </div>
 
           <div className="card" id="skills">
             <h2>Skills</h2>
-
-            <div className="hr" />
-
-            <h3>Technical</h3>
-            <div className="kv">
-              {skills.technical.map((s) => <span key={s}>{s}</span>)}
+            <div className="skill-group">
+              <h3>Technical</h3>
+              <div className="kv">
+                {skills.technical.map((s) => <span key={s}>{s}</span>)}
+              </div>
             </div>
-
-            <div className="hr" />
-
-            <h3>Soft</h3>
-            <div className="kv">
-              {skills.soft.map((s) => <span key={s}>{s}</span>)}
+            <div className="skill-group">
+              <h3>Soft</h3>
+              <div className="kv">
+                {skills.soft.map((s) => <span key={s}>{s}</span>)}
+              </div>
             </div>
           </div>
         </div>
 
-        <Section id="timeline" title="Timeline (dated items)">
+        <Section id="timeline" title="Timeline">
           <div className="card">
             <Timeline items={timeline} />
           </div>
         </Section>
 
         <Section id="contact" title="Contact">
-          <div className="grid three">
-            <div className="card">
-              <h2>Email</h2>
-              <p className="muted">Best for initial outreach.</p>
+          <div className="card contact-card">
+            <h2>Lets connect</h2>
+            <p className="muted">Email works best for first outreach. Phone is great for quick follow-ups.</p>
+            <div className="row">
               <a className="cta" href={emailHref}>{person.email}</a>
-            </div>
-            <div className="card">
-              <h2>Phone</h2>
-              <p className="muted">Available for calls or quick follow-ups.</p>
-              <a className="cta" href={phoneHref}>{person.phone}</a>
-            </div>
-            <div className="card">
-              <h2>Links</h2>
-              <p className="muted">Professional profiles and repositories.</p>
-              <div className="kv">
-                {person.links.map((l) => (
-                  <a className="pill" key={l.label} href={l.href} target="_blank" rel="noreferrer">
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-              <p className="small" style={{ marginTop: 10 }}>
-                Feel free to connect or view my work on LinkedIn and GitHub!
-              </p>
+              <a className="cta secondary" href={phoneHref}>{person.phone}</a>
             </div>
           </div>
 
           <div className="footer">
             <div>
-              © {new Date().getFullYear()} {person.name}. Built with React + TypeScript.
+              (c) {new Date().getFullYear()} {person.name}. Built with React + TypeScript.
             </div>
           </div>
         </Section>
