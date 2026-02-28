@@ -3,7 +3,7 @@ import type { TimelineItem } from "../data/resumeData";
 function fmtMonth(yyyyMm: string) {
   // yyyy-mm
   const [y, m] = yyyyMm.split("-").map((v) => Number(v));
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   if (!y || !m) return yyyyMm;
   return `${months[m - 1]} ${y}`;
 }
@@ -12,7 +12,7 @@ function fmtRange(item: TimelineItem) {
   if (item.date) return fmtMonth(item.date);
   const start = item.start ? fmtMonth(item.start) : "";
   const end = item.end ? (item.end === "Present" ? "Present" : fmtMonth(item.end)) : "";
-  if (start && end) return `${start} — ${end}`;
+  if (start && end) return `${start} - ${end}`;
   return start || end || "";
 }
 
@@ -29,8 +29,8 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
             <div>
               <div className="twhere">
                 {it.title}
-                {it.org ? <span className="muted"> · {it.org}</span> : null}
-                {it.location ? <span className="muted"> · {it.location}</span> : null}
+                {it.org ? <span className="muted"> - {it.org}</span> : null}
+                {it.location ? <span className="muted"> - {it.location}</span> : null}
               </div>
               <div className="small">{it.type}</div>
             </div>
