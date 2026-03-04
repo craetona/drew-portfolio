@@ -1,16 +1,24 @@
-import React from "react";
+import type { ReactNode } from "react";
 import { person, summary, skills, timeline } from "./data/resumeData";
 import Timeline from "./components/Timeline";
 
+/**
+ * Shared wrapper for top-level sections to keep heading and spacing consistent.
+ */
+interface SectionProps {
+  id: string;
+  title: string;
+  children: ReactNode;
+}
+
+/**
+ * Reusable section shell used by the single-page anchor navigation.
+ */
 function Section({
   id,
   title,
   children,
-}: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-}) {
+}: SectionProps) {
   return (
     <section id={id} className="section">
       <div className="section-title">
@@ -21,12 +29,17 @@ function Section({
   );
 }
 
+/**
+ * Root portfolio page rendered as a static SPA.
+ */
 export default function App() {
   const emailHref = `mailto:${person.email}`;
+  // Strip formatting characters so `tel:` is broadly compatible across devices.
   const phoneHref = `tel:${person.phone.replace(/[^0-9+]/g, "")}`;
 
   return (
     <>
+      {/* Anchor-based nav keeps this portfolio dependency-light and GitHub Pages friendly. */}
       <header className="nav">
         <div className="nav-inner">
           <a className="brand" href="#top">
@@ -71,13 +84,31 @@ export default function App() {
           <div className="card" id="skills">
             <h2>Skills</h2>
             <div className="skill-group">
-              <h3>Technical</h3>
+              <h3>Languages and Frameworks</h3>
               <div className="kv">
-                {skills.technical.map((s) => <span key={s}>{s}</span>)}
+                {skills.languages.map((s) => <span key={s}>{s}</span>)}
               </div>
             </div>
             <div className="skill-group">
-              <h3>Soft</h3>
+              <h3>Tools</h3>
+              <div className="kv">
+                {skills.tools.map((s) => <span key={s}>{s}</span>)}
+              </div>
+            </div>
+            <div className="skill-group">
+              <h3>Web Dev</h3>
+              <div className="kv">
+                {skills.web.map((s) => <span key={s}>{s}</span>)}
+              </div>
+            </div>
+            <div className="skill-group">
+              <h3>IT and Systems Fundamentals</h3>
+              <div className="kv">
+                {skills.it.map((s) => <span key={s}>{s}</span>)}
+              </div>
+            </div>
+            <div className="skill-group">
+              <h3>Soft Skills</h3>
               <div className="kv">
                 {skills.soft.map((s) => <span key={s}>{s}</span>)}
               </div>
@@ -93,7 +124,7 @@ export default function App() {
 
         <Section id="contact" title="Contact">
           <div className="card contact-card">
-            <h2>Lets connect</h2>
+            <h2>Let's connect</h2>
             <p className="muted">Email works best for first outreach. Phone is great for quick follow-ups.</p>
             <div className="row">
               <a className="cta" href={emailHref}>{person.email}</a>

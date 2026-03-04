@@ -1,5 +1,8 @@
 import type { TimelineItem } from "../data/resumeData";
 
+/**
+ * Converts `YYYY-MM` strings into concise, human-readable labels.
+ */
 function fmtMonth(yyyyMm: string) {
   // yyyy-mm
   const [y, m] = yyyyMm.split("-").map((v) => Number(v));
@@ -8,6 +11,9 @@ function fmtMonth(yyyyMm: string) {
   return `${months[m - 1]} ${y}`;
 }
 
+/**
+ * Normalizes point-in-time and range entries into one display string.
+ */
 function fmtRange(item: TimelineItem) {
   if (item.date) return fmtMonth(item.date);
   const start = item.start ? fmtMonth(item.start) : "";
@@ -16,10 +22,17 @@ function fmtRange(item: TimelineItem) {
   return start || end || "";
 }
 
-export default function Timeline({ items }: { items: TimelineItem[] }) {
-  // Sort newest -> oldest by end/date/start
-  const toKey = (it: TimelineItem) => (it.date ?? it.end ?? it.start ?? "0000-01");
-  const sorted = [...items].sort((a, b) => (toKey(b) > toKey(a) ? 1 : -1));
+interface TimelineProps {
+  items: TimelineItem[];
+}
+
+/**
+ * Chronological timeline used across experience, education, projects, and certifications.
+ */
+export default function Timeline({ items }: TimelineProps) {
+  // Lexical sort works because dates are stored in zero-padded `YYYY-MM` format.
+  const toSortKey = (it: TimelineItem) => it.date ?? it.end ?? it.start ?? "0000-01";
+  const sorted = [...items].sort((a, b) => toSortKey(b).localeCompare(toSortKey(a)));
 
   return (
     <div className="timeline" aria-label="Timeline">

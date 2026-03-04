@@ -1,5 +1,17 @@
+/**
+ * Static content model for the portfolio.
+ * Keeping all resume content in one module makes updates easy and reviewable.
+ */
+
+/**
+ * Common label/url pair used across profile and timeline cards.
+ */
 export type Link = { label: string; href: string };
 
+/**
+ * Unified schema for timeline entries.
+ * Date strings stay sortable when stored as `YYYY-MM`.
+ */
 export type TimelineItem = {
   type: "Experience" | "Project" | "Education" | "Certification";
   title: string;
@@ -13,23 +25,31 @@ export type TimelineItem = {
   links?: Link[];
 };
 
+/**
+ * Primary profile metadata shown in the nav, about, and contact sections.
+ */
 export const person = {
   name: "Andrew Craeton",
   location: "Bend, OR",
   phone: "971-408-8373",
   email: "craetona@gmail.com",
   links: [
-    // Replace these with your actual URLs (keeping the resume labels present).
     { label: "LinkedIn", href: "https://www.linkedin.com/in/craetona" },
     { label: "GitHub", href: "https://github.com/craetona" },
   ] as Link[],
 };
 
+/**
+ * Professional positioning statement displayed in the About section.
+ */
 export const summary =
-  "Software engineer with hands-on experience in front-end UI/UX design and back-end web development, proficient in JavaScript, HTML, CSS and CI/CD pipelines. Demonstrated technical problem-solving and system troubleshooting skills from aerospace and semiconductor roles. Collaborative team player adept at owning projects from prototype to deployment and eager to ship scalable, type-safe applications while expanding expertise in serverless architectures.";
+  "Computer Science graduate with experience building full-stack web features and embedded firmware integrations on a team project (ESP32 + web UI). Comfortable shipping code with Git, automated tests, and CI/CD (GitHub Actions). Strong troubleshooting background from aircraft maintenance and semiconductor/robotics training. Seeking an entry-level Software Engineer role focused on building reliable, user-friendly systems.";
 
+/**
+ * Skill groups rendered as badges in the Skills section.
+ */
 export const skills = {
-  technical: [
+  languages: [
     "HTML",
     "CSS",
     "JavaScript",
@@ -37,17 +57,29 @@ export const skills = {
     "Python",
     "C/C++",
     "React",
-    "UX Optimization",
-    "Git Version Control",
-    "CI/CD pipelines",
-    "Front-end UI/UX design and development",
+    "Preact",
+  ],
+  tools: [
+    "Git",
+    "GitHub",
+    "GitHub Actions (CI/CD)",
+    "Automated testing",
+    "CLI workflows",
+  ],
+  web: [
+    "UI/UX Implementation and Optimization",
+    "RESTful APIs",
+    "Front-end web development",
     "Back-end web development",
-    "Windows 10/11 installation and configuration",
-    "User profiles and file permissions",
-    "Basic PowerShell",
-    "Linux terminal",
+  ],
+  it: [
     "Command Prompt",
-    "Understanding of domains, TCP/IP, DNS",
+    "Basic PowerShell",
+    "Basic Linux terminal",
+    "User profiles and permissions",
+    "HTTP/HTTPS",
+    "TCP/IP",
+    "DNS",
     "Basic network troubleshooting",
   ],
   soft: [
@@ -61,6 +93,9 @@ export const skills = {
   ],
 };
 
+/**
+ * Reverse-chronological career, education, and project history.
+ */
 export const timeline: TimelineItem[] = [
   {
     type: "Experience",
@@ -131,7 +166,7 @@ export const timeline: TimelineItem[] = [
     title: "Personal Portfolio Website",
     start: "2025-10",
     end: "Present",
-    tags: ["HTML", "CSS", "JavaScript", "React", "TypeScript", "UI/UX Design", "GitHub Pages"],
+    tags: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Full-Stack Development", "UI/UX Design", "GitHub Pages"],
     bullets: [
       "Built a responsive, accessible portfolio website using React and TypeScript.",
       "Implemented a clean, modern UI/UX design with attention to accessibility and usability.",

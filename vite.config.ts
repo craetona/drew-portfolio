@@ -4,5 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // GitHub Pages project site is served from /<repo-name>/, not domain root.
   base: "/drew-portfolio/",
 })
